@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Banking - Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <h1>Welcome, {{ user.name }}</h1>
+
+        <div class="account-card">
+            <h3>Account Number</h3>
+            <p>{{ user.account_number }}</p>
+
+            <h3>Available Balance</h3>
+            <h2>₹ {{ user.balance }}</h2>
+        </div>
+
+        <div class="menu">
+            <a href="#">Transfer Money</a>
+            <a href="#">Deposit</a>
+            <a href="#">Withdraw</a>
+            <a href="#">Transactions</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+
+        <h2>Recent Transactions</h2>
+
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.transaction_type }}</td>
+                <td>₹ {{ transaction.amount }}</td>
+                <td>{{ transaction.description }}</td>
+                <td>{{ transaction.created_at }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+</html>
